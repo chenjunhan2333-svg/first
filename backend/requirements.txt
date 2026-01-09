@@ -1,0 +1,45 @@
+# FastAPI 核心
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+
+# 数据库
+sqlalchemy==2.0.23
+alembic==1.12.1
+psycopg2-binary==2.9.9
+
+# 认证与安全
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+bcrypt==4.1.2  # 兼容 passlib 1.7.4 的版本
+python-dotenv==1.0.0
+
+# 工具库
+pydantic==2.5.0
+pydantic-settings==2.1.0
+python-dateutil==2.8.2
+email-validator==2.1.0
+
+# 图像处理（已移除图片上传功能，保留以备将来使用）
+# opencv-python==4.8.1.78
+# Pillow>=10.0.0,<11.0.0
+
+# 日志
+loguru==0.7.2
+
+# 测试
+pytest==7.4.3
+pytest-asyncio==0.21.1
+httpx==0.25.2
+pytest-cov==4.1.0
+
+# 代码质量
+black==23.11.0
+flake8==6.1.0
+mypy==1.7.0
+bandit==1.7.5
+
+# 安全扫描
+pip-audit==2.6.2
+
+

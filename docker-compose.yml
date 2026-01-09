@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    container_name: quartz_postgres
+    environment:
+      POSTGRES_USER: quartz_user
+      POSTGRES_PASSWORD: quartz_password
+      POSTGRES_DB: quartz_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U quartz_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: quartz_backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://quartz_user:quartz_password@postgres:5432/quartz_db
+      SECRET_KEY: ${SECRET_KEY:-dev-secret-key-change-in-production}
+    volumes:
+      - ./backend:/app
+      - backend_uploads:/app/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+volumes:
+  postgres_data:
+  backend_uploads:
+
+
+
+
+
+
+
+
