@@ -68,53 +68,20 @@
   - 测试覆盖率要求
   - 测试指标和持续改进
 
-#### 2. GitHub Actions 工作流（CI/CD）
-- **文件**：`.github/workflows/ci.yml`
-- **功能**：
-  - **后端测试**：pytest 单元测试和覆盖率报告
-  - **后端代码质量**：Black、Flake8、Mypy、Bandit
-  - **后端安全扫描**：pip-audit
-  - **前端测试**：Vitest 单元测试和覆盖率报告
-  - **前端代码质量**：ESLint、Prettier
-  - **前端安全扫描**：npm audit
-  - 所有检查集成到 CI/CD 流程
-
-#### 3. 静态代码分析工具
-- **后端**：
-  - **Black**：代码格式化检查
-  - **Flake8**：代码风格检查
-  - **Mypy**：类型检查
-  - **Bandit**：安全漏洞扫描
-  - **pip-audit**：依赖安全扫描
-- **前端**：
-  - **ESLint**：代码质量检查（已配置 `.eslintrc.cjs`）
-  - **Prettier**：代码格式化（已配置 `.prettierrc`）
-  - **npm audit**：依赖安全扫描
-
-#### 4. 缺陷跟踪和管理
-- **Issue 模板**：
-  - `.github/ISSUE_TEMPLATE/bug_report.md`：Bug 报告模板
-  - `.github/ISSUE_TEMPLATE/feature_request.md`：功能请求模板
-  - `.github/ISSUE_TEMPLATE/config.yml`：Issue 模板配置
-- **文档**：`docs/BUG_TRACKING.md`
+#### 2. 测试计划（已实现）
+- **文档**：`docs/TEST_PLAN.md`、`docs/TEST_STRATEGY.md`
 - **内容**：
-  - 缺陷分类（严重程度、优先级、类型）
-  - 缺陷生命周期
-  - 缺陷报告规范
-  - 缺陷处理流程
-  - 缺陷统计与分析
-  - 缺陷预防措施
-  - 缺陷跟踪工具使用
-  - 缺陷回归测试
-  - 缺陷管理最佳实践
+  - 测试概述和目标
+  - 测试类型和策略
+  - 测试环境配置
+  - 测试执行策略
+  - 测试工具配置
+  - 测试覆盖率要求
 
 ## 文件清单
 
 ### GitHub 配置
-- `.github/workflows/ci.yml` - CI/CD 工作流
-- `.github/ISSUE_TEMPLATE/bug_report.md` - Bug 报告模板
-- `.github/ISSUE_TEMPLATE/feature_request.md` - 功能请求模板
-- `.github/ISSUE_TEMPLATE/config.yml` - Issue 模板配置
+- （CI/CD 工作流和 Issue 模板已移除）
 
 ### 项目管理文档
 - `docs/PROJECT_MANAGEMENT.md` - 项目管理规范（分支策略、代码评审、合并策略）
@@ -126,12 +93,9 @@
 ### 测试相关文档
 - `docs/TEST_PLAN.md` - 测试计划（已存在）
 - `docs/TEST_STRATEGY.md` - 测试策略
-- `docs/BUG_TRACKING.md` - 缺陷跟踪和管理
 
 ### 代码质量配置
-- `frontend/.eslintrc.cjs` - ESLint 配置（已存在）
-- `frontend/.prettierrc` - Prettier 配置（已存在）
-- `backend/requirements.txt` - 包含所有测试和质量工具
+- （静态代码分析工具配置已移除）
 
 ## 使用指南
 
@@ -157,20 +121,10 @@
 3. 填写相关信息
 4. 提交 Issue
 
-### 5. CI/CD 工作流
-- 工作流会在每次 Push 到 `main` 或 `develop` 分支时自动触发
-- 工作流会在创建 Pull Request 时自动触发
-- 所有检查必须通过才能合并代码
-
-### 6. 代码质量检查
-- **本地检查**：
-  - 后端：`black app tests`, `flake8 app tests`, `mypy app`, `bandit -r app`
-  - 前端：`npm run lint`, `npx prettier --check src/`
-- **CI 检查**：自动在 GitHub Actions 中执行
-
-### 7. 安全扫描
-- **后端**：`pip-audit` 在 CI 中自动执行
-- **前端**：`npm audit` 在 CI 中自动执行
+### 5. 本地测试
+- 开发人员可以在本地运行测试
+- 后端：`pytest tests/`
+- 前端：`npm run test`
 
 ## 下一步建议
 
