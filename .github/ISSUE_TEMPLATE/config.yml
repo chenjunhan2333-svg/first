@@ -1,0 +1,9 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 项目文档
+    url: https://github.com/chenjunhan2333-svg/first/tree/main/docs
+    about: 查看项目文档了解更多信息
+  - name: 问题讨论
+    url: https://github.com/chenjunhan2333-svg/first/discussions
+    about: 在讨论区提问或分享想法
+
