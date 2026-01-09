@@ -9,12 +9,14 @@ from app.core.database import Base
 
 class UserRole(str, enum.Enum):
     """用户角色枚举"""
+
     ADMIN = "admin"
     USER = "user"
 
 
 class User(Base):
     """用户表"""
+
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -26,11 +28,3 @@ class User(Base):
     is_active = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
-
-
-
-
-
-
-
-

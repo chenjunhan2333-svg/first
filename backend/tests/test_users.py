@@ -98,7 +98,7 @@ def test_delete_user_as_admin(client, admin_token, test_user):
         headers={"Authorization": f"Bearer {admin_token}"},
     )
     assert response.status_code == status.HTTP_204_NO_CONTENT
-    
+
     # 验证用户已被删除
     response = client.get(
         "/api/v1/users",
@@ -154,7 +154,7 @@ def test_delete_admin_user(client, admin_token, test_admin):
         headers={"Authorization": f"Bearer {admin_token}"},
     )
     admin2_id = response.json()["id"]
-    
+
     # 尝试删除管理员
     response = client.delete(
         f"/api/v1/users/{admin2_id}",
@@ -162,6 +162,3 @@ def test_delete_admin_user(client, admin_token, test_admin):
     )
     assert response.status_code == status.HTTP_400_BAD_REQUEST
     assert "不能删除管理员账号" in response.json()["detail"]
-
-
-

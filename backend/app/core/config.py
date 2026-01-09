@@ -9,7 +9,9 @@ class Settings(BaseSettings):
     """应用配置"""
 
     # 数据库配置
-    DATABASE_URL: str = "postgresql://quartz_user:quartz_password@localhost:5432/quartz_db"
+    DATABASE_URL: str = (
+        "postgresql://quartz_user:quartz_password@localhost:5432/quartz_db"
+    )
 
     # 安全配置
     SECRET_KEY: str = "dev-secret-key-change-in-production"
@@ -40,6 +42,3 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
-
-
-

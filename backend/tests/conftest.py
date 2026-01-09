@@ -39,12 +39,13 @@ def db():
 @pytest.fixture(scope="function")
 def client(db):
     """创建测试客户端"""
+
     def override_get_db():
         try:
             yield db
         finally:
             pass
-    
+
     app.dependency_overrides[get_db] = override_get_db
     with TestClient(app) as test_client:
         yield test_client
@@ -103,6 +104,3 @@ def user_token(client, test_user):
         data={"username": "testuser", "password": "testpass123"},
     )
     return response.json()["access_token"]
-
-
-

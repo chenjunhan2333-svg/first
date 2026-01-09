@@ -111,4 +111,3 @@ def test_get_current_user_invalid_token(client):
         headers={"Authorization": "Bearer invalid_token"},
     )
     assert response.status_code == status.HTTP_401_UNAUTHORIZED
-
