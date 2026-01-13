@@ -1,0 +1,45 @@
+# Bandit 配置文件
+exclude_dirs:
+  - tests
+  - venv
+  - __pycache__
+  - alembic/versions
+
+skips:
+  - B101  # assert_used: 测试中允许使用 assert
+  - B601  # shell_injection_subprocess: 某些场景下需要 shell 命令
+
+test_plugins:
+  - bandit.plugins.bandit_assert_used
+  - bandit.plugins.bandit_bad_file_permissions
+  - bandit.plugins.bandit_bad_function_calls
+  - bandit.plugins.bandit_bad_imports
+  - bandit.plugins.bandit_bad_socket_use
+  - bandit.plugins.bandit_bind_to_all_interfaces
+  - bandit.plugins.bandit_django_mark_safe
+  - bandit.plugins.bandit_django_utils_mark_safe
+  - bandit.plugins.bandit_exec_used
+  - bandit.plugins.bandit_hardcoded_password_funcarg
+  - bandit.plugins.bandit_hardcoded_password_string
+  - bandit.plugins.bandit_hardcoded_password_string_no_user
+  - bandit.plugins.bandit_hardcoded_tmp_directory
+  - bandit.plugins.bandit_import_pickle
+  - bandit.plugins.bandit_import_subprocess
+  - bandit.plugins.bandit_import_xml_etree
+  - bandit.plugins.bandit_import_xmlrpc
+  - bandit.plugins.bandit_mako_templates
+  - bandit.plugins.bandit_md5
+  - bandit.plugins.bandit_no_shell
+  - bandit.plugins.bandit_paramiko_calls
+  - bandit.plugins.bandit_paramiko_insecure_cipher
+  - bandit.plugins.bandit_pycrypto_usage
+  - bandit.plugins.bandit_request_with_no_cert_validation
+  - bandit.plugins.bandit_ssl_with_bad_version
+  - bandit.plugins.bandit_ssl_with_bad_defaults
+  - bandit.plugins.bandit_tarfile_unsafe_members
+  - bandit.plugins.bandit_telnetlib_usage
+  - bandit.plugins.bandit_urllib_urlopen
+  - bandit.plugins.bandit_wildcard_injection
+  - bandit.plugins.bandit_yaml_load
+  - bandit.plugins.bandit_weak_cryptographic_key
+
