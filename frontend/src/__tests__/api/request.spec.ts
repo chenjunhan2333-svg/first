@@ -18,9 +18,17 @@ vi.mock('@/router', () => ({
 }))
 
 describe('request interceptor', () => {
+  const originalConsoleError = console.error
+
   beforeEach(() => {
     vi.clearAllMocks()
     localStorage.clear()
+    // 抑制预期的错误输出
+    console.error = vi.fn()
+  })
+
+  afterEach(() => {
+    console.error = originalConsoleError
   })
 
   describe('request interceptor', () => {
@@ -150,10 +158,15 @@ describe('request interceptor', () => {
 
       const interceptor = (request as any).interceptors.response.handlers[0]
       
+      // 抑制 console.error 输出
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+      
       try {
         await interceptor.rejected(error)
       } catch (e) {
         expect(ElMessage.error).toHaveBeenCalledWith('无法连接到服务器，请检查后端服务是否运行')
+      } finally {
+        consoleErrorSpy.mockRestore()
       }
     })
 
@@ -164,10 +177,15 @@ describe('request interceptor', () => {
 
       const interceptor = (request as any).interceptors.response.handlers[0]
       
+      // 抑制 console.error 输出
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+      
       try {
         await interceptor.rejected(error)
       } catch (e) {
         expect(ElMessage.error).toHaveBeenCalledWith('请求配置错误: Request config error')
+      } finally {
+        consoleErrorSpy.mockRestore()
       }
     })
   })

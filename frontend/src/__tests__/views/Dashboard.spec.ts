@@ -18,9 +18,17 @@ vi.mock('@/stores/auth', () => ({
 }))
 
 describe('Dashboard.vue', () => {
+  const originalConsoleError = console.error
+
   beforeEach(() => {
     setActivePinia(createPinia())
     vi.clearAllMocks()
+    // 抑制预期的错误输出
+    console.error = vi.fn()
+  })
+
+  afterEach(() => {
+    console.error = originalConsoleError
   })
 
   it('应该渲染仪表板', () => {
@@ -54,12 +62,17 @@ describe('Dashboard.vue', () => {
   it('应该处理统计数据加载失败', async () => {
     vi.mocked(getUserStats).mockRejectedValue(new Error('Network error'))
 
+    // 抑制 console.error 输出（组件内部会输出错误）
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+
     const wrapper = mount(Dashboard)
 
     await wrapper.vm.$nextTick()
     await new Promise(resolve => setTimeout(resolve, 100))
 
     expect(getUserStats).toHaveBeenCalled()
+    
+    consoleErrorSpy.mockRestore()
   })
 
   it('应该在挂载时加载统计数据', async () => {
