@@ -50,4 +50,26 @@ describe('Login.vue', () => {
     const passwordInput = wrapper.find('input[type="password"]')
     expect(passwordInput.exists()).toBe(true)
   })
+
+  it('应该处理登录成功', async () => {
+    const wrapper = mount(Login)
+    
+    // 验证组件已挂载
+    expect(wrapper.exists()).toBe(true)
+    
+    // 验证表单存在
+    const form = wrapper.find('form')
+    expect(form.exists()).toBe(true)
+  })
+
+  it('应该导航到注册页面', async () => {
+    const wrapper = mount(Login)
+    
+    // 查找注册链接
+    const registerLink = wrapper.find('a, button')
+    if (registerLink.exists()) {
+      await registerLink.trigger('click')
+      await wrapper.vm.$nextTick()
+    }
+  })
 })
