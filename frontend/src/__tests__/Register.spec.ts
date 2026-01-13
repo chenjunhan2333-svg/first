@@ -30,24 +30,25 @@ describe('Register.vue', () => {
   })
 
   it('应该渲染注册表单', () => {
-    const wrapper = mount(Register, {
-      global: {
-        stubs: ['el-card', 'el-form', 'el-form-item', 'el-input', 'el-button', 'el-link'],
-      },
-    })
+    const wrapper = mount(Register)
     
-    expect(wrapper.html()).toContain('用户注册')
+    // 查找标题文本 - Element Plus 的 el-card header 会渲染 h2
+    const title = wrapper.find('h2')
+    expect(title.exists()).toBe(true)
+    expect(title.text()).toBe('用户注册')
   })
 
   it('应该包含所有必填字段', () => {
-    const wrapper = mount(Register, {
-      global: {
-        stubs: ['el-card', 'el-form', 'el-form-item', 'el-input', 'el-button', 'el-link'],
-      },
-    })
+    const wrapper = mount(Register)
     
-    const form = wrapper.findComponent({ name: 'ElForm' })
-    expect(form.exists()).toBe(true)
+    // 查找必填字段（用户名、邮箱、密码、确认密码）
+    // Element Plus 的 el-input 会渲染 input 元素
+    const inputs = wrapper.findAll('input[type="text"], input[type="email"], input[type="password"]')
+    expect(inputs.length).toBeGreaterThanOrEqual(4)
+    
+    // 验证至少有一个密码输入框
+    const passwordInputs = wrapper.findAll('input[type="password"]')
+    expect(passwordInputs.length).toBeGreaterThanOrEqual(2) // 密码和确认密码
   })
 })
 
